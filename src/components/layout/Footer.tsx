@@ -22,9 +22,6 @@ export function Footer() {
               <a href="https://instagram.com" className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="https://linkedin.com" className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
               <a href="mailto:contato@ronalddigital.com" className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
                 <Mail className="h-5 w-5" />
               </a>

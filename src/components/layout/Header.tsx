@@ -23,7 +23,7 @@ export function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-glow">
+          <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary">
             <Code2 className="h-6 w-6 text-white" />
           </div>
           <span className="text-xl font-bold text-gradient">Ronald Digital</span>
@@ -62,9 +62,9 @@ export function Header() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-8 w-8" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-8 w-8" />
             )}
           </Button>
         </div>

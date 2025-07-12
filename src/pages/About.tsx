@@ -19,7 +19,7 @@ export default function About() {
         {/* About Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <div>
-            <img src="/assets/sua-foto.jpg" alt="Foto de Ronald"
+            <img src="/public/logo.png" alt="Foto de Ronald"
                  className="w-40 h-40 object-cover rounded-full shadow-lg mx-auto mb-6 border-4 border-primary"
   />
             <h2 className="text-3xl font-bold mb-6">Minha Jornada</h2>

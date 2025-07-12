@@ -51,7 +51,7 @@ export function ServicesSection() {
               className="card-elegant card-hover p-6 rounded-xl"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-primary-glow rounded-xl mb-6 mx-auto">
+              <div className="flex items-center justify-center w-16 h-16 bg-primary rounded-xl mb-6 mx-auto">
                 <service.icon className="h-8 w-8 text-white" />
               </div>
               

@@ -16,20 +16,10 @@ export function HeroSection() {
         <div className="absolute inset-0 hero-gradient opacity-90" />
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute top-40 left-6 animate-float">
-        <div className="w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center">
-          <Sparkles className="w-8 h-8 text-primary" />
-        </div>
-      </div>
-      <div className="absolute bottom-20 right-10 animate-float" style={{ animationDelay: '2s' }}>
-        <div className="w-12 h-12 rounded-full bg-primary-glow/20 backdrop-blur-sm flex items-center justify-center">
-          <Zap className="w-6 h-6 text-primary-glow" />
-        </div>
-      </div>
+      
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center pt-6">
         <div className="animate-fade-up">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Transformando Ideias em
