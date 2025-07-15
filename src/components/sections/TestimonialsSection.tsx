@@ -46,7 +46,7 @@ export function TestimonialsSection() {
               className="card-elegant card-hover p-8 rounded-xl relative"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
-              <Quote className="absolute top-6 right-6 h-8 w-8 text-primary/20" />
+              <Quote className="absolute top-6 right-6 h-8 w-8 text-blue-500/20" />
               
               {/* Rating */}
               <div className="flex mb-4">

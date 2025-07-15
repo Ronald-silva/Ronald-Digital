@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-digital-workspace.jpg";
 
@@ -16,10 +16,9 @@ export function HeroSection() {
         <div className="absolute inset-0 hero-gradient opacity-90" />
       </div>
 
-      
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center pt-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <div className="animate-fade-up">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Transformando Ideias em
@@ -33,14 +32,14 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button asChild size="lg" className="btn-gradient text-lg px-8 py-4 w-full sm:w-auto sm:min-w-[220px]">
-              <Link to="/contato">
+            <Button asChild size="lg" className="btn-gradient text-lg px-8 py-4 w-full sm:w-60">
+              <Link to="/orcamento">
                 Solicitar Orçamento
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-
-            <Button asChild variant="outline" size="lg" className="text-lg px-8 py-4 border-white/20 text-white hover:bg-white/10 bg-transparent w-full sm:w-auto sm:min-w-[220px]">
+            
+            <Button asChild variant="outline" size="lg" className="text-lg px-8 py-4 border-white/20 text-white hover:bg-white/10 bg-transparent w-full sm:w-52">
               <Link to="/portfolio">
                 Ver Trabalhos
               </Link>

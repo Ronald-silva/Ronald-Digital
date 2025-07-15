@@ -26,7 +26,7 @@ export function Header() {
           <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary">
             <Code2 className="h-6 w-6 text-white" />
           </div>
-          <span className="text-xl font-bold text-gradient">Ronald Digital</span>
+          <span className="text-xl font-bold text-primary">Ronald Digital</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -50,7 +50,7 @@ export function Header() {
         {/* CTA Button */}
         <div className="hidden lg:flex">
           <Button asChild className="btn-gradient">
-            <Link to="/contato">Solicitar Orçamento</Link>
+            <Link to="/orcamento">Solicitar Orçamento</Link>
           </Button>
         </div>
 
@@ -62,9 +62,9 @@ export function Header() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
-              <X className="h-8 w-8" />
+              <X className="h-6 w-6" />
             ) : (
-              <Menu className="h-8 w-8" />
+              <Menu className="h-6 w-6" />
             )}
           </Button>
         </div>
@@ -91,7 +91,7 @@ export function Header() {
             ))}
             <div className="pt-4">
               <Button asChild className="w-full btn-gradient">
-                <Link to="/contato" onClick={() => setMobileMenuOpen(false)}>
+                <Link to="/orcamento" onClick={() => setMobileMenuOpen(false)}>
                   Solicitar Orçamento
                 </Link>
               </Button>

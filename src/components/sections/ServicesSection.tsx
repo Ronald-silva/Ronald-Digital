@@ -51,7 +51,7 @@ export function ServicesSection() {
               className="card-elegant card-hover p-6 rounded-xl"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="flex items-center justify-center w-16 h-16 bg-primary rounded-xl mb-6 mx-auto">
+              <div className="flex items-center justify-center w-16 h-16 bg-blue-500 rounded-xl mb-6 mx-auto">
                 <service.icon className="h-8 w-8 text-white" />
               </div>
               
@@ -61,7 +61,7 @@ export function ServicesSection() {
               <ul className="space-y-2">
                 {service.features.map((feature) => (
                   <li key={feature} className="flex items-center text-sm text-muted-foreground">
-                    <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0" />
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0" />
                     {feature}
                   </li>
                 ))}

@@ -22,7 +22,10 @@ export function Footer() {
               <a href="https://instagram.com" className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="mailto:contato@ronalddigital.com" className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+              <a href="https://linkedin.com" className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="mailto:ronald.digital27@gmail.com" className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
             </div>
@@ -36,7 +39,6 @@ export function Footer() {
               <li><Link to="/sobre" className="text-gray-300 hover:text-white transition-colors">Sobre</Link></li>
               <li><Link to="/servicos" className="text-gray-300 hover:text-white transition-colors">Serviços</Link></li>
               <li><Link to="/portfolio" className="text-gray-300 hover:text-white transition-colors">Portfólio</Link></li>
-              
             </ul>
           </div>
 
@@ -46,7 +48,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center space-x-2 text-gray-300">
                 <Mail className="h-4 w-4" />
-                <span>contato@ronalddigital.com</span>
+                <span>ronald.digital27@gmail.com</span>
               </li>
               <li className="flex items-center space-x-2 text-gray-300">
                 <Phone className="h-4 w-4" />

@@ -1,48 +1,78 @@
-import { Check, ArrowRight } from "lucide-react";
+import { Monitor, Palette, TrendingUp, Globe, Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-const servicePackages = [
+const services = [
   {
-    name: "Básico",
-    price: "R$ 799",
-    description: "Ideal para freelancers e pequenos negócios",
+    icon: Monitor,
+    title: "Sites Institucionais",
+    description: "Sites corporativos modernos, responsivos e otimizados para SEO que fortalecem sua marca no mercado digital.",
     features: [
-      "Design responsivo",
-      "Até 5 páginas",
-      "Formulário de contato",
-      "Otimização básica SEO",
+      "Design responsivo para todos os dispositivos",
+      "Otimização completa para motores de busca (SEO)",
+      "Carregamento rápido e performance otimizada",
       "Integração com redes sociais",
-      "30 dias de suporte"
+      "Painel administrativo intuitivo",
+      "Formulários de contato personalizados"
+    ],
+    benefits: [
+      "Aumente sua credibilidade online",
+      "Melhore o posicionamento no Google",
+      "Conquiste mais clientes"
     ]
   },
   {
-    name: "Profissional",
-    price: "R$ 1.299",
-    description: "Perfeito para empresas em crescimento",
+    icon: Palette,
+    title: "Portfólios Profissionais",
+    description: "Portfólios impactantes que destacam seu trabalho e atraem seus clientes ideais através de um design único.",
     features: [
-      "Tudo do plano Básico",
-      "Até 10 páginas",
-      "Blog integrado",
-      "SEO avançado",
-      "Analytics integrado",
-      "Chat online",
-      "60 dias de suporte"
+      "Design personalizado e exclusivo",
+      "Galeria interativa de projetos",
+      "Otimização total para dispositivos móveis",
+      "Sistema de categorização de trabalhos",
+      "Formulário de contato integrado",
+      "Carregamento otimizado de imagens"
     ],
-    popular: true
+    benefits: [
+      "Destaque-se da concorrência",
+      "Impressione clientes potenciais",
+      "Mostre seu profissionalismo"
+    ]
   },
   {
-    name: "Premium",
-    price: "R$ 1.999",
-    description: "Solução completa para grandes projetos",
+    icon: TrendingUp,
+    title: "Landing Pages",
+    description: "Páginas de alta conversão estrategicamente desenvolvidas para gerar leads qualificados e aumentar suas vendas.",
     features: [
-      "Tudo do plano Profissional",
-      "Páginas ilimitadas",
-      "E-commerce básico",
-      "Integrações avançadas",
-      "Treinamento personalizado",
-      "3 meses de suporte",
-      "Manutenção mensal inclusa"
+      "Design focado em conversão",
+      "Testes A/B para otimização",
+      "Integração com ferramentas de analytics",
+      "Formulários otimizados para leads",
+      "Call-to-actions estratégicos",
+      "Carregamento ultra-rápido"
+    ],
+    benefits: [
+      "Aumente sua taxa de conversão",
+      "Gere mais leads qualificados",
+      "Maximize seu ROI em marketing"
+    ]
+  },
+  {
+    icon: Globe,
+    title: "Blogs Personalizados",
+    description: "Blogs funcionais e atraentes que engajam sua audiência, melhoram seu SEO e posicionam você como autoridade.",
+    features: [
+      "Sistema de gerenciamento de conteúdo (CMS) intuitivo",
+      "Otimização SEO em cada artigo",
+      "Design atrativo e profissional",
+      "Sistema de comentários integrado",
+      "Compartilhamento social automático",
+      "Newsletter integrada"
+    ],
+    benefits: [
+      "Construa autoridade no seu nicho",
+      "Melhore seu posicionamento SEO",
+      "Engaje e eduque sua audiência"
     ]
   }
 ];
@@ -57,64 +87,95 @@ export default function Services() {
             Nossos <span className="text-gradient">Serviços</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Soluções digitais completas para transformar sua presença online e acelerar seu crescimento
+            Soluções digitais completas e personalizadas para elevar sua presença online e impulsionar seus resultados
           </p>
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {servicePackages.map((pkg, index) => (
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+          {services.map((service, index) => (
             <div 
-              key={pkg.name}
-              className={`card-elegant card-hover p-8 rounded-xl relative ${
-                pkg.popular ? 'ring-2 ring-primary scale-105' : ''
-              }`}
+              key={service.title} 
+              className="card-elegant card-hover p-8 rounded-xl"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {pkg.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-primary to-primary-glow text-white px-4 py-2 rounded-full text-sm font-medium">
-                    Mais Popular
-                  </span>
+              <div className="flex items-center mb-6">
+                <div className="flex items-center justify-center w-16 h-16 bg-blue-500 rounded-xl mr-4">
+                  <service.icon className="h-8 w-8 text-white" />
                 </div>
-              )}
+                <h3 className="text-2xl font-bold">{service.title}</h3>
+              </div>
               
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold mb-2">{pkg.name}</h3>
-                <div className="text-3xl font-bold text-primary mb-2">{pkg.price}</div>
-                <p className="text-muted-foreground">{pkg.description}</p>
+              <p className="text-muted-foreground mb-6 leading-relaxed">
+                {service.description}
+              </p>
+              
+              <div className="mb-6">
+                <h4 className="font-semibold mb-3 text-foreground">O que está incluído:</h4>
+                <ul className="space-y-2">
+                  {service.features.map((feature) => (
+                    <li key={feature} className="flex items-start text-sm text-muted-foreground">
+                      <Check className="h-4 w-4 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <ul className="space-y-4 mb-8">
-                {pkg.features.map((feature) => (
-                  <li key={feature} className="flex items-center">
-                    <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                    <span className="text-muted-foreground">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Button 
-                asChild 
-                className={`w-full ${pkg.popular ? 'btn-gradient' : ''}`}
-                variant={pkg.popular ? 'default' : 'outline'}
-              >
-                <Link to="/contato">
-                  Escolher Plano
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <div className="border-t border-border pt-4">
+                <h4 className="font-semibold mb-3 text-foreground">Benefícios:</h4>
+                <ul className="space-y-1">
+                  {service.benefits.map((benefit) => (
+                    <li key={benefit} className="flex items-center text-sm font-medium text-blue-600">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0" />
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Custom Solutions */}
+        {/* Process Section */}
+        <div className="card-elegant p-8 rounded-xl mb-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Como Trabalhamos</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Nosso processo é transparente e colaborativo, garantindo que cada projeto seja executado com excelência
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {[
+              { step: "1", title: "Briefing", desc: "Entendemos suas necessidades e objetivos" },
+              { step: "2", title: "Planejamento", desc: "Criamos a estratégia e estrutura do projeto" },
+              { step: "3", title: "Desenvolvimento", desc: "Construímos sua solução digital" },
+              { step: "4", title: "Entrega", desc: "Testamos, refinamos e colocamos no ar" }
+            ].map((item) => (
+              <div key={item.step} className="text-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-primary to-primary-glow text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">
+                  {item.step}
+                </div>
+                <h3 className="font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
         <div className="card-elegant p-8 rounded-xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Precisa de algo personalizado?</h2>
+          <h2 className="text-3xl font-bold mb-4">Pronto para Começar seu Projeto?</h2>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Cada projeto é único. Oferecemos soluções sob medida para atender às suas necessidades específicas.
+            Cada projeto é único e desenvolvido sob medida para suas necessidades. 
+            Solicite um orçamento personalizado e vamos transformar sua visão em realidade digital.
           </p>
           <Button asChild className="btn-gradient">
-            <Link to="/contato">Solicitar Orçamento Personalizado</Link>
+            <Link to="/orcamento">
+              Solicitar Orçamento Personalizado
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </Button>
         </div>
       </div>

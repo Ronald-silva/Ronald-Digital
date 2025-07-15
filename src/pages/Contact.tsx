@@ -1,30 +1,8 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Mensagem enviada!",
-      description: "Entraremos em contato em até 24 horas.",
-    });
-    
-    setIsSubmitting(false);
-  };
 
   return (
     <div className="pt-24 pb-20">
@@ -35,140 +13,93 @@ export default function Contact() {
             Entre em <span className="text-gradient">Contato</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Pronto para transformar sua presença digital? Vamos conversar sobre seu projeto!
+            Transforme sua visão em realidade digital. Entre em contato e vamos discutir como podemos impulsionar seu negócio
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="card-elegant p-8 rounded-xl">
-            <h2 className="text-2xl font-bold mb-6">Solicitar Orçamento</h2>
+        {/* Contact Information Section */}
+        <div className="max-w-4xl mx-auto">
+          <div className="card-elegant p-8 rounded-xl mb-8">
+            <h2 className="text-2xl font-bold mb-6 text-center">Como Entrar em Contato</h2>
+            <p className="text-muted-foreground text-center mb-8">
+              Estamos prontos para transformar suas ideias em realidade digital. Entre em contato através dos canais abaixo.
+            </p>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="name">Nome completo</Label>
-                  <Input id="name" placeholder="Seu nome" required />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-xl mx-auto mb-4">
+                  <Mail className="h-8 w-8 text-blue-500" />
                 </div>
-                <div>
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="seu@email.com" required />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="phone">Telefone</Label>
-                  <Input id="phone" placeholder="(11) 99999-9999" />
-                </div>
-                <div>
-                  <Label htmlFor="service">Tipo de serviço</Label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecione um serviço" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="site">Site Institucional</SelectItem>
-                      <SelectItem value="portfolio">Portfólio</SelectItem>
-                      <SelectItem value="landing">Landing Page</SelectItem>
-                      <SelectItem value="blog">Blog</SelectItem>
-                      <SelectItem value="custom">Projeto Personalizado</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                <h3 className="font-semibold mb-2">Email</h3>
+                <p className="text-muted-foreground mb-2">ronald.digital27@gmail.com</p>
+                <p className="text-sm text-muted-foreground">Resposta em até 24h</p>
               </div>
 
-              <div>
-                <Label htmlFor="budget">Orçamento estimado</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecione uma faixa" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="500-1000">R$ 500 - R$ 1.000</SelectItem>
-                    <SelectItem value="1000-2000">R$ 1.000 - R$ 2.000</SelectItem>
-                    <SelectItem value="2000-5000">R$ 2.000 - R$ 5.000</SelectItem>
-                    <SelectItem value="5000+">Acima de R$ 5.000</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="text-center">
+                <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-xl mx-auto mb-4">
+                  <Phone className="h-8 w-8 text-blue-500" />
+                </div>
+                <h3 className="font-semibold mb-2">WhatsApp</h3>
+                <p className="text-muted-foreground mb-2">(85) 99199-3833</p>
+                <p className="text-sm text-muted-foreground">Para conversas rápidas</p>
               </div>
 
-              <div>
-                <Label htmlFor="message">Mensagem</Label>
-                <Textarea 
-                  id="message" 
-                  placeholder="Conte-nos sobre seu projeto..."
-                  rows={5}
-                  required
-                />
+              <div className="text-center">
+                <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-xl mx-auto mb-4">
+                  <MapPin className="h-8 w-8 text-blue-500" />
+                </div>
+                <h3 className="font-semibold mb-2">Localização</h3>
+                <p className="text-muted-foreground mb-2">Fortaleza, CE</p>
+                <p className="text-sm text-muted-foreground">Atendimento remoto</p>
               </div>
-
-              <Button 
-                type="submit" 
-                className="w-full btn-gradient" 
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  "Enviando..."
-                ) : (
-                  <>
-                    Enviar Mensagem
-                    <Send className="ml-2 h-4 w-4" />
-                  </>
-                )}
-              </Button>
-            </form>
+            </div>
           </div>
 
-          {/* Contact Info */}
-          <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="card-elegant p-8 rounded-xl">
-              <h3 className="text-xl font-bold mb-6">Informações de Contato</h3>
+              <h3 className="text-xl font-bold mb-4">Horário de Atendimento</h3>
+              <p className="text-muted-foreground mb-6">
+                Estamos disponíveis para atender você nos seguintes horários:
+              </p>
               
-              <div className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg">
-                    <Mail className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-medium">Email</div>
-                    <div className="text-muted-foreground">contato@ronalddigital.com</div>
-                  </div>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center py-2 border-b border-border">
+                  <span className="font-medium">Segunda a Sexta</span>
+                  <span className="text-muted-foreground">9h às 18h</span>
                 </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg">
-                    <Phone className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-medium">WhatsApp</div>
-                    <div className="text-muted-foreground">(85) 99199-3833</div>
-                  </div>
+                <div className="flex justify-between items-center py-2 border-b border-border">
+                  <span className="font-medium">Sábado</span>
+                  <span className="text-muted-foreground">9h às 12h</span>
                 </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg">
-                    <MapPin className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-medium">Localização</div>
-                    <div className="text-muted-foreground">Fortaleza, CE - Brasil</div>
-                  </div>
+                <div className="flex justify-between items-center py-2">
+                  <span className="font-medium">Domingo</span>
+                  <span className="text-muted-foreground">Fechado</span>
                 </div>
+              </div>
+              
+              <div className="bg-blue-50 p-4 rounded-lg mt-6">
+                <p className="text-sm text-blue-600">
+                  <strong>Urgências:</strong> Entre em contato via WhatsApp para respostas mais rápidas.
+                </p>
               </div>
             </div>
 
             <div className="card-elegant p-8 rounded-xl">
-              <h3 className="text-xl font-bold mb-4">Tempo de Resposta</h3>
-              <p className="text-muted-foreground mb-4">
-                Respondemos todas as mensagens em até 24 horas. Para urgências, 
-                entre em contato via WhatsApp.
+              <h3 className="text-xl font-bold mb-4">Pronto para Começar?</h3>
+              <p className="text-muted-foreground mb-6">
+                Tem um projeto em mente? Solicite um orçamento personalizado e vamos transformar sua visão em realidade.
               </p>
               
-              <div className="bg-primary/5 p-4 rounded-lg">
-                <div className="text-sm font-medium text-primary mb-1">Horário de Atendimento</div>
-                <div className="text-sm text-muted-foreground">Segunda a Sexta: 9h às 18h</div>
-              </div>
+              <Button asChild className="w-full btn-gradient mb-4">
+                <Link to="/orcamento">
+                  Solicitar Orçamento
+                  <Send className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              
+              <p className="text-sm text-center text-muted-foreground">
+                Resposta garantida em até 24 horas
+              </p>
             </div>
           </div>
         </div>

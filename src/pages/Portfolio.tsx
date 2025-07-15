@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const portfolioItems = [
   {
@@ -89,7 +90,7 @@ export default function Portfolio() {
             Nosso <span className="text-gradient">Portfólio</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Conheça alguns dos projetos que desenvolvemos e veja como podemos ajudar seu negócio
+            Cada projeto é desenvolvido com foco em resultados, combinando design moderno e funcionalidade excepcional
           </p>
         </div>
 
@@ -120,16 +121,25 @@ export default function Portfolio() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="absolute bottom-4 left-4 right-4">
                     <div className="flex gap-2">
-                      <Button size="sm" variant="secondary" asChild>
-                        <a href={item.liveUrl} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="h-4 w-4" />
-                        </a>
-                      </Button>
-                      <Button size="sm" variant="secondary" asChild>
-                        <a href={item.githubUrl} target="_blank" rel="noopener noreferrer">
-                          <Github className="h-4 w-4" />
-                        </a>
-                      </Button>
+                      {item.liveUrl !== "#" && (
+                        <Button size="sm" variant="secondary" asChild>
+                          <a href={item.liveUrl} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
+                        </Button>
+                      )}
+                      {item.githubUrl !== "#" && (
+                        <Button size="sm" variant="secondary" asChild>
+                          <a href={item.githubUrl} target="_blank" rel="noopener noreferrer">
+                            <Github className="h-4 w-4" />
+                          </a>
+                        </Button>
+                      )}
+                      {item.liveUrl === "#" && item.githubUrl === "#" && (
+                        <div className="bg-black/50 text-white px-3 py-1 rounded text-sm">
+                          Em breve
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -143,7 +153,7 @@ export default function Portfolio() {
                   {item.technologies.map((tech) => (
                     <span 
                       key={tech}
-                      className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full"
+                      className="px-2 py-1 bg-blue-100 text-blue-500 text-xs rounded-full"
                     >
                       {tech}
                     </span>
@@ -162,7 +172,7 @@ export default function Portfolio() {
               Estes são apenas alguns exemplos do nosso trabalho. Cada projeto é único e desenvolvido especialmente para atender às necessidades do cliente.
             </p>
             <Button asChild className="btn-gradient">
-              <a href="/contato">Solicitar Orçamento</a>
+              <Link to="/orcamento">Solicitar Orçamento</Link>
             </Button>
           </div>
         </div>
