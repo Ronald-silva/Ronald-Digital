@@ -117,7 +117,7 @@ export const testNotificationSetup = async (): Promise<boolean> => {
       inspiracoes: 'Teste',
       nome: 'Teste',
       email: 'teste@teste.com',
-      telefone: '11999999999',
+      telefone: '85991993833',
       orcamentoEstimado: 'ate-2000',
       prazoDesejado: '1-mes',
       mensagemAdicional: 'Teste de configuração'
