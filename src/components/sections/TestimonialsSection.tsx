@@ -1,4 +1,6 @@
 import { Star, Quote } from "lucide-react";
+import mhImage from '../../assets/mh.png';
+
 
 const testimonials = [
   {
@@ -6,7 +8,7 @@ const testimonials = [
     role: "Professor",
     content: "Recomendo a todos os que buscam qualidade, inovação e um parceiro comprometido com o sucesso do seu negócio online. Ele não entrega apenas sites; ele entrega soluções que impulsionam resultados. Sou muito grato por essa parceria!",
     rating: 5,
-    image: "/src/assets/mh.png"
+    image: mhImage
   },
   {
     name: "João Santos",
