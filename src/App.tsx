@@ -10,6 +10,7 @@ import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
 import Contact from "./pages/Contact";
 import Orcamento from "./pages/Orcamento";
+import TestEmailJS from "./pages/TestEmailJS";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/contato" element={<Contact />} />
             <Route path="/orcamento" element={<Orcamento />} />
+            <Route path="/test-emailjs" element={<TestEmailJS />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

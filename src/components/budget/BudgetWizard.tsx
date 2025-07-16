@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
-import { ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, Check, Loader2 } from "lucide-react";
+import { sendBudgetNotification } from "@/services/notificationService";
 import { BasicInfoStep } from "./steps/BasicInfoStep";
 import { GoalsStep } from "./steps/GoalsStep";
 import { DesignStep } from "./steps/DesignStep";
@@ -58,6 +59,7 @@ export function BudgetWizard() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<BudgetFormData>(initialFormData);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const updateFormData = (data: Partial<BudgetFormData>) => {
@@ -100,7 +102,7 @@ export function BudgetWizard() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateStep(currentStep)) {
       toast({
         title: "Campos obrigatórios",
@@ -110,14 +112,40 @@ export function BudgetWizard() {
       return;
     }
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      const result = await sendBudgetNotification(formData);
+      
+      if (result.emailSuccess || result.whatsappSuccess) {
+        setIsSubmitted(true);
+        
+        let successMessage = "Solicitação enviada com sucesso!";
+        if (result.emailSuccess && result.whatsappSuccess) {
+          successMessage = "Orçamento enviado por email e notificação WhatsApp enviada!";
+        } else if (result.emailSuccess) {
+          successMessage = "Orçamento enviado por email com sucesso!";
+        } else if (result.whatsappSuccess) {
+          successMessage = "Notificação WhatsApp enviada com sucesso!";
+        }
+        
+        toast({
+          title: "✅ Orçamento Enviado!",
+          description: successMessage + " Entraremos em contato em breve!",
+        });
+      } else {
+        throw new Error("Falha em todos os métodos de envio");
+      }
+    } catch (error) {
+      console.error("Erro ao enviar orçamento:", error);
       toast({
-        title: "Solicitação enviada com sucesso!",
-        description: "Entraremos em contato em breve para discutir seu projeto.",
+        title: "Erro no envio",
+        description: "Houve um problema ao enviar sua solicitação. Tente novamente ou entre em contato diretamente.",
+        variant: "destructive"
       });
-    }, 1000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const progress = (currentStep / steps.length) * 100;
@@ -218,10 +246,20 @@ export function BudgetWizard() {
         {currentStep === steps.length ? (
           <Button
             onClick={handleSubmit}
+            disabled={isSubmitting}
             className="btn-gradient flex items-center space-x-2"
           >
-            <span>Enviar Solicitação</span>
-            <Check className="w-4 h-4" />
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>Enviando...</span>
+              </>
+            ) : (
+              <>
+                <span>Enviar Solicitação</span>
+                <Check className="w-4 h-4" />
+              </>
+            )}
           </Button>
         ) : (
           <Button
