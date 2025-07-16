@@ -2,11 +2,11 @@ import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Maria Silva",
-    role: "Empreendedora",
-    content: "O Ronald criou um site incrível para minha empresa. O resultado superou todas as expectativas!",
+    name: "Heribaldo Ferreira",
+    role: "Professor",
+    content: "Recomendo a todos os que buscam qualidade, inovação e um parceiro comprometido com o sucesso do seu negócio online. Ele não entrega apenas sites; ele entrega soluções que impulsionam resultados. Sou muito grato por essa parceria!",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b1e0?w=150&h=150&fit=crop&crop=face"
+    image: "/src/assets/mh.png"
   },
   {
     name: "João Santos",
