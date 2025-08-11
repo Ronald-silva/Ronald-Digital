@@ -1,6 +1,6 @@
 // Teste local do agente (rode com: node test/test-agent.js)
 import { MultiAgentSalesSystem } from "../lib/agents/multiAgent.js";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 // Carrega as variáveis do arquivo .env
 dotenv.config();
