@@ -2,7 +2,8 @@
 import { MultiAgentSalesSystem } from "../lib/agents/multiAgent.js";
 
 // Mock das variáveis de ambiente para teste
-process.env.OPENAI_API_KEY = "sua_chave_aqui"; // Substitua pela sua chave
+process.env.OPENAI_API_KEY = "sua_chave_aqui"; // 
+process.env.GROK_API_KEY = "GROK_API_KEY";
 process.env.BUSINESS_EMAIL = "ronald.digital27@gmail.com";
 process.env.BUSINESS_PHONE = "5585991993833";
 
