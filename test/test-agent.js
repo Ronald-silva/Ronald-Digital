@@ -1,8 +1,9 @@
 // Teste local do agente (rode com: node test/test-agent.js)
 import { MultiAgentSalesSystem } from "../lib/agents/multiAgent.js";
+import dotenv from 'dotenv';
 
-// Mock das variáveis de ambiente para teste
-process.env.GROK_API_KEY || "sua_chave_grok_aqui";
+// Carrega as variáveis do arquivo .env
+dotenv.config();
 process.env.BUSINESS_EMAIL = "ronald.digital27@gmail.com";
 process.env.BUSINESS_PHONE = "5585991993833";
 
