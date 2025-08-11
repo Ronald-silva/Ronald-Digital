@@ -1,5 +1,5 @@
 # Arquivos de variáveis de ambiente
-.env.example
+.env
 # Logs
 logs
 *.log
