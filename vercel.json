@@ -1,13 +1,7 @@
 {
   "functions": {
-    "pages/api/agente.js": {
+    "api/agente.js": {
       "maxDuration": 30
     }
-  },
-  "env": {
-    "GROK_API_KEY": "@grok_api_key",
-    "OPENAI_API_KEY": "@openai_api_key",
-    "BUSINESS_EMAIL": "@business_email",
-    "BUSINESS_PHONE": "@business_phone"
   }
 }
