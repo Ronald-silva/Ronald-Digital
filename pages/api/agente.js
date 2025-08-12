@@ -1,4 +1,4 @@
-import { MultiAgentSalesSystem } from "../../lib/agents/multiAgent.js";
+import { SaraAI } from "../../lib/agents/saraAI.js";
 import cors from "cors";
 
 // Configuração CORS
@@ -55,35 +55,35 @@ export default async function handler(req, res) {
     // Log para debug (remover em produção)
     console.log("Processando lead:", { nome, email, tipoServico });
 
-    // Inicializa o sistema multi-agente
-    const multiAgent = new MultiAgentSalesSystem();
+    // Inicializa a Sara AI com escuta ativa
+    const sara = new SaraAI();
     
-    // Processa o formulário
-    const resultado = await multiAgent.processFormSubmission({
+    // Processa a mensagem com a nova lógica de escuta ativa
+    const resultado = await sara.processMessage(mensagem, {
       nome,
-      email, 
-      mensagem,
+      email,
       tipoServico
     });
 
     // Log do resultado (remover em produção)
     console.log("Resultado do agente:", resultado);
 
-    // Retorna resposta
+    // Retorna resposta da Sara AI
     if (resultado.success) {
       return res.status(200).json({
         success: true,
-        resposta: resultado.resposta,
-        etapa: resultado.etapa,
+        resposta: resultado.response, // Sara AI usa 'response' em vez de 'resposta'
+        etapa: resultado.conversationStage,
         leadScore: resultado.leadScore,
-        proximaAcao: resultado.proximaAcao,
+        proximaAcao: resultado.nextAction,
+        agenteAtivo: resultado.activeAgent,
         timestamp: new Date().toISOString()
       });
     } else {
       return res.status(500).json({
         success: false,
         error: resultado.error,
-        resposta: resultado.resposta
+        resposta: resultado.response || "Erro interno do sistema"
       });
     }
 

@@ -465,32 +465,105 @@ export function ChatWidget() {
     return "Como posso te ajudar mais?";
   };
 
-  const sendMessage = () => {
+  // Fallback inteligente quando a API falha - com ESCUTA ATIVA
+  const getIntelligentFallback = (message: string, ctx: ConversationContext): string => {
+    const lowerMsg = message.toLowerCase();
+    
+    // PRIORIDADE MÁXIMA: Perguntas diretas sobre negócio
+    if (lowerMsg.includes('vocês fazem') || lowerMsg.includes('vocês vendem') || lowerMsg.includes('que tipo de')) {
+      if (lowerMsg.includes('computador') || lowerMsg.includes('hardware')) {
+        return "Não, nós não vendemos computadores. Somos especialistas em criação de sites, landing pages e portfólios profissionais. Posso te ajudar com algum projeto digital?";
+      }
+      return "Nós da Ronald Digital criamos sites, landing pages e portfólios profissionais. Qual tipo de projeto você tem em mente?";
+    }
+    
+    // PRIORIDADE ALTA: Expressões de dúvida
+    if (lowerMsg.includes('dúvida') || lowerMsg.includes('pergunta') || lowerMsg.includes('me ajuda')) {
+      return "Claro! Pode perguntar à vontade. Estou aqui para te ajudar com qualquer dúvida sobre nossos serviços.";
+    }
+    
+    // PRIORIDADE BAIXA: Saudações - RESPONDE ADEQUADAMENTE
+    if (lowerMsg.includes('oi') || lowerMsg.includes('olá') || lowerMsg.includes('ola')) {
+      return "Oi! Que bom te ver por aqui! 😊 Como posso te ajudar hoje?";
+    }
+    
+    if (lowerMsg.includes('bom dia')) {
+      return "Bom dia! Fico feliz em te ajudar! Como posso te auxiliar hoje?";
+    }
+    
+    if (lowerMsg.includes('boa tarde')) {
+      return "Boa tarde! Que ótimo falar com você! Em que posso te ajudar?";
+    }
+    
+    if (lowerMsg.includes('boa noite')) {
+      return "Boa noite! Prazer em te atender! Como posso te ajudar?";
+    }
+    
+    // Perguntas sobre serviços específicos
+    if (lowerMsg.includes('portfólio') || lowerMsg.includes('portfolio')) {
+      return "Ótima escolha! Portfólios são essenciais para mostrar seu trabalho e conquistar credibilidade. Que tipo de portfólio você precisa?";
+    }
+    
+    if (lowerMsg.includes('landing page') || lowerMsg.includes('página de vendas')) {
+      return "Perfeito! Landing pages são ideais para converter visitantes em clientes. Qual produto ou serviço você quer promover?";
+    }
+    
+    if (lowerMsg.includes('site')) {
+      return "Excelente! Um site profissional é fundamental para qualquer negócio hoje. Que tipo de site você tem em mente?";
+    }
+    
+    // Perguntas sobre preços
+    if (lowerMsg.includes('preço') || lowerMsg.includes('valor') || lowerMsg.includes('custa')) {
+      return "Nossos preços variam de R$ 400 a R$ 2.000, dependendo do tipo de projeto:\n\n• Landing Pages: R$ 500-1.000\n• Portfólios: R$ 400-800\n• Sites completos: R$ 800-2.000\n\nQue tipo de projeto você precisa?";
+    }
+    
+    // Resposta padrão amigável
+    return "Entendi! Para te ajudar melhor, me conta: que tipo de projeto digital você tem em mente? Site, landing page, portfólio...?";
+  };
+
+  const sendMessage = async () => {
     if (!inputText.trim()) return;
     
     addMessage('user', inputText);
-    
-    // Extrai informações e atualiza contexto
-    const newInfo = extractInfo(inputText);
-    const intent = getIntent(inputText);
-    
-    const updatedContext: ConversationContext = {
-      ...context,
-      ...newInfo,
-      currentStep: context.currentStep + 1,
-      topics: [...context.topics, intent].filter((item, index, arr) => arr.indexOf(item) === index),
-      lastIntent: intent
-    };
-    
-    setContext(updatedContext);
-    
-    // Gera resposta inteligente
-    setTimeout(() => {
-      const response = generateIntelligentResponse(inputText, updatedContext);
-      addMessage('bot', response);
-    }, 1000 + Math.random() * 500); // Varia o tempo para parecer mais humano
-    
     setInputText("");
+    
+    try {
+      // Chama a API real da Sara AI com escuta ativa
+      const response = await fetch('/api/agente', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: context.clientName || 'Cliente Chat',
+          email: 'cliente@chat.com',
+          mensagem: inputText,
+          tipoServico: context.projectType || ''
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        // Atualiza contexto com informações da Sara AI
+        setContext(prev => ({
+          ...prev,
+          currentStep: prev.currentStep + 1,
+          lastIntent: getIntent(inputText)
+        }));
+        
+        addMessage('bot', result.resposta);
+      } else {
+        // Fallback inteligente quando API falha
+        const fallbackResponse = getIntelligentFallback(inputText, context);
+        addMessage('bot', fallbackResponse);
+      }
+    } catch (error) {
+      console.error('Erro ao chamar API:', error);
+      // Fallback inteligente quando há erro de conexão
+      const fallbackResponse = getIntelligentFallback(inputText, context);
+      addMessage('bot', fallbackResponse);
+    }
   };
 
   const openChat = () => {
@@ -499,7 +572,7 @@ export function ChatWidget() {
     setMessages([]);
     setContext({ currentStep: 0, topics: [] });
     setTimeout(() => {
-      addMessage('bot', "👋 Oi! Sou a Sara da Ronald Digital! ✨\n\nSou especialista em projetos digitais e vou te ajudar a criar o site perfeito para seu negócio! Como posso te ajudar?");
+      addMessage('bot', "👋 Oi! Sou a Sara da Ronald Digital! ✨\n\nComo posso te ajudar hoje?");
     }, 500);
   };
 

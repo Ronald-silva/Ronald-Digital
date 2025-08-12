@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Orcamento from "./pages/Orcamento";
 import TestEmailJS from "./pages/TestEmailJS";
 import TesteAgente from "./pages/TesteAgente";
+import SaraAI from "./pages/SaraAI";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/orcamento" element={<Orcamento />} />
             <Route path="/test-emailjs" element={<TestEmailJS />} />
             <Route path="/teste-agente" element={<TesteAgente />} />
+            <Route path="/sara-ai" element={<SaraAI />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
