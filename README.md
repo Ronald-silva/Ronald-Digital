@@ -1,119 +1,107 @@
-# 🤖 Agente de IA Multi-Especialista - Ronald Digital
+🤖 Agente de IA Multi-Especialista - Ronald Digital
+Sistema de agente multi-agente com LangChain para captação, qualificação e vendas de sites, utilizando as filosofias de vendas de Neil Rackham, Jill Konrath e Gary Vaynerchuk.
 
-Sistema de agente multi-agente com LangChain para captação, qualificação e vendas de sites usando as personas de Neil Patel, Jill Konrath e Gary Vaynerchuk.
+🎯 Funcionalidades
+🧠 Sistema de Agente Multi-Especialista
+Neil Rackham (Captação e Análise Consultiva): Atua como um consultor, fazendo perguntas estratégicas baseadas no SPIN Selling para entender a fundo a situação, o problema, a implicação e a necessidade do cliente. Ele garante que a solução proposta seja a mais adequada, e não apenas um produto genérico.
 
-## 🎯 Funcionalidades
+Jill Konrath (Qualificação e Eficiência): Especialista em lidar com clientes ocupados. Ela aplica a metodologia BANT (Budget, Authority, Need, Timeline) de forma concisa e direta, qualificando o lead rapidamente para garantir que o tempo do cliente e do agente seja usado de forma eficiente.
 
-### 🧠 Multi-Agente System
+Gary Vaynerchuk (Vendas e Relacionamento): Focado em construir valor e confiança. Este agente é responsável por apresentar a proposta de forma persuasiva, oferecer conteúdo de valor (como guias e artigos) e, por fim, fechar a venda ou nutrir o relacionamento para futuras oportunidades.
 
-- **Neil Patel (Captação)**: Analisa necessidades e faz perguntas estratégicas
-- **Jill Konrath (Qualificação)**: Aplica metodologia BANT para qualificar leads
-- **Gary Vaynerchuk (Vendas)**: Fecha vendas ou nutre relacionamento
+💰 Serviços Oferecidos
+Landing Pages: R$ 500-1.000 (Foco em alta conversão e captação de leads).
 
-### 💰 Serviços Oferecidos
+Portfólios: R$ 400-800 (Foco em credibilidade e apresentação profissional).
 
-- **Landing Pages**: R$ 500-1.000 (conversão e captação)
-- **Portfólios**: R$ 400-800 (credibilidade profissional)
-- **Sites/Blogs**: R$ 800-2.000 (autoridade e SEO)
+Sites/Blogs: R$ 800-2.000 (Foco em autoridade, SEO e conteúdo).
 
-### 🚀 Tecnologias
+🚀 Tecnologias
+LangChain: Framework robusto para orquestração de agentes de IA.
 
-- **LangChain**: Framework para agentes de IA
-- **Grok API**: IA da xAI (gratuita) com fallback para OpenAI
-- **Next.js**: Framework React para API routes
-- **Vercel**: Deploy serverless gratuito
+Grok API: IA da xAI (gratuita) com fallback para OpenAI para maior estabilidade.
 
-## 📦 Instalação
+Next.js: Framework React para as rotas da API.
 
-### 1. Clone e instale dependências
+Vercel: Plataforma serverless para deploy gratuito e escalável.
 
-```bash
+📦 Instalação
+1. Clone o repositório e instale as dependências
+Bash
+
 git clone <seu-repo>
 cd ronald-digital-ai-agent
 npm install
-```
+2. Configure as variáveis de ambiente
+Copie o arquivo de exemplo e edite as suas informações:
 
-### 2. Configure variáveis de ambiente
+Bash
 
-```bash
 cp .env.example .env.local
-```
+Edite o arquivo .env.local com suas chaves e informações de negócio:
 
-Edite `.env.local`:
+Snippet de código
 
-```env
-# API Keys (obtenha uma das duas)
+# API Keys (obtenha pelo menos uma)
 GROK_API_KEY=your_grok_api_key_here
 OPENAI_API_KEY=your_openai_api_key_here
 
-# Configurações do negócio
+# Configurações do seu negócio
 BUSINESS_EMAIL=ronald.digital27@gmail.com
 BUSINESS_PHONE=5585991993833
 BUSINESS_NAME=Ronald Digital
 
-# Preços dos serviços
+# Faixas de preço dos serviços
 LANDING_PAGE_MIN=500
 LANDING_PAGE_MAX=1000
 PORTFOLIO_MIN=400
 PORTFOLIO_MAX=800
 WEBSITE_MIN=800
 WEBSITE_MAX=2000
-```
+3. Teste a aplicação localmente
+Bash
 
-### 3. Teste localmente
-
-```bash
-# Desenvolvimento
+# Para iniciar o ambiente de desenvolvimento
 npm run dev
 
-# Teste do agente
+# Para rodar os testes unitários do agente
 npm run test
-```
+🔑 Obtendo suas API Keys
+Grok API (Recomendado - Gratuito)
+Acesse: https://console.x.ai/
 
-## 🔑 Obtendo API Keys
+Crie sua conta e obtenha a sua chave.
 
-### Grok API (Recomendado - Gratuito)
+Adicione a chave em GROK_API_KEY no seu .env.local.
 
-1. Acesse: https://console.x.ai/
-2. Crie conta e obtenha API key
-3. Adicione em `GROK_API_KEY`
+OpenAI API (Fallback)
+Acesse: https://platform.openai.com/
 
-### OpenAI API (Fallback)
+Crie sua conta e obtenha a chave.
 
-1. Acesse: https://platform.openai.com/
-2. Crie conta e obtenha API key
-3. Adicione em `OPENAI_API_KEY`
+Adicione a chave em OPENAI_API_KEY no seu .env.local.
 
-## 🚀 Deploy no Vercel
+🚀 Deploy no Vercel
+1. Faça o deploy automático
+Bash
 
-### 1. Deploy automático
-
-```bash
-# Instale Vercel CLI
+# Instale a Vercel CLI, se ainda não tiver
 npm i -g vercel
 
-# Deploy
+# Execute o deploy
 vercel --prod
-```
+2. Configure as variáveis no Vercel
+No painel do Vercel, adicione suas variáveis de ambiente na seção de configurações do projeto, como GROK_API_KEY, BUSINESS_EMAIL, etc.
 
-### 2. Configure variáveis no Vercel
+3. Teste em produção
+Acesse a página de teste do agente na URL gerada pelo Vercel: https://seu-site.vercel.app/agente-teste
 
-No dashboard do Vercel, adicione as environment variables:
+📋 Como Usar
+1. Integração com seu site
+Use a seguinte estrutura de código para enviar dados do seu formulário ou chat para o agente:
 
-- `GROK_API_KEY` ou `OPENAI_API_KEY`
-- `BUSINESS_EMAIL`
-- `BUSINESS_PHONE`
+JavaScript
 
-### 3. Teste em produção
-
-Acesse: `https://seu-site.vercel.app/agente-teste`
-
-## 📋 Como Usar
-
-### 1. Integração no seu site
-
-```javascript
-// Exemplo de integração
 const enviarParaAgente = async (formData) => {
   const response = await fetch("/api/agente", {
     method: "POST",
@@ -129,141 +117,105 @@ const enviarParaAgente = async (formData) => {
   const resultado = await response.json();
 
   if (resultado.success) {
-    // Exibe resposta do agente
+    // Ação com a resposta do agente
     console.log(resultado.resposta);
-    console.log("Lead Score:", resultado.leadScore);
+    console.log("Pontuação do Lead:", resultado.leadScore);
   }
 };
-```
+2. Página de teste
+Acesse a rota /agente-teste para simular o formulário completo e testar o fluxo de qualificação.
 
-### 2. Página de teste
+🔄 Fluxo do Agente
+O agente principal "Maestro" direciona a conversa, acionando a persona ideal para cada interação:
 
-Acesse `/agente-teste` para testar o formulário completo.
+📝 Formulário → 🎯 Neil Rackham → 📊 Jill Konrath → 💰 Gary Vaynerchuk → 📧 Resposta
+   ↓                ↓                   ↓                  ↓                  ↓
+ Input do       Análise e          Qualificação         Vendas ou         Resposta
+   Cliente      Perguntas         (Metodologia         Nutrição          Personalizada
+                Consultivas          BANT)
+Exemplo de Resposta
+JSON
 
-## 🔄 Fluxo do Agente
-
-```
-📝 Formulário → 🎯 Neil Patel → 📊 Jill Konrath → 💰 Gary Vaynerchuk → 📧 Resposta
-    ↓              ↓               ↓                ↓                  ↓
-  Input do      Captação e      Qualificação     Vendas ou         Resposta
-   Cliente      Perguntas        BANT           Nutrição         Personalizada
-```
-
-### Exemplo de Resposta
-
-```json
 {
   "success": true,
-  "resposta": "Olá João! Vi que você precisa de uma landing page para sua loja de roupas. Com R$ 800 de orçamento, posso criar uma landing page otimizada com IA que vai converter visitantes em clientes. Que tal agendar uma conversa de 15 minutos para detalhar seu projeto?",
+  "resposta": "Olá João! Com base no que você me disse, nossa landing page otimizada com IA pode ser a solução ideal. Com um orçamento de R$ 800, podemos focar em converter visitantes em clientes para sua loja. Que tal agendarmos uma conversa de 15 minutos para detalharmos o seu projeto?",
   "etapa": "vendas",
   "leadScore": 4,
   "proximaAcao": "fechar_venda"
 }
-```
+🧪 Testes
+Teste local
+Bash
 
-## 🧪 Testes
-
-### Teste local
-
-```bash
 node test/test-agent.js
-```
+Casos de teste incluídos
+Lead Quente (orçamento + prazo definidos)
 
-### Casos de teste inclusos
+Lead Morno (interesse, mas sem urgência)
 
-- Lead quente (orçamento + prazo definidos)
-- Lead morno (interesse mas sem urgência)
-- Lead frio (apenas curiosidade)
+Lead Frio (apenas curiosidade)
 
-## 💡 Personalização
+💡 Personalização
+Modificar Personas
+Edite o arquivo lib/agents/personas.js para ajustar:
 
-### Modificar Personas
+Personalidade dos agentes
 
-Edite `lib/agents/personas.js` para ajustar:
+Conhecimentos específicos de cada um
 
-- Personalidade dos agentes
-- Conhecimentos específicos
-- Processo de vendas
-- Preços e serviços
+Processo de vendas e preços
 
-### Adicionar Novos Agentes
+Prompt inicial do agente "Maestro"
 
-```javascript
-// Em personas.js
+Adicionar novos agentes
+Basta seguir a mesma estrutura no arquivo personas.js para criar um novo agente:
+
+JavaScript
+
 NOVO_AGENTE: {
   name: "Seu Nome",
   role: "Sua Especialidade",
   prompt: "Seu prompt personalizado..."
 }
-```
+📊 Métricas e Analytics
+O sistema retorna dados valiosos que podem ser usados para analisar a performance do agente:
 
-## 📊 Métricas e Analytics
+Lead Score: 0-4 (baseado na metodologia BANT).
 
-O sistema retorna:
+Classificação: Quente/Morno/Frio.
 
-- **Lead Score**: 0-4 (baseado em BANT)
-- **Classificação**: Quente/Morno/Frio
-- **Etapa**: Captação/Qualificação/Vendas
-- **Próxima Ação**: Fechar/Agendar/Nutrir
+Etapa: Captação/Qualificação/Vendas.
 
-## 🔧 Troubleshooting
+Próxima Ação: Fechar/Agendar/Nutrir.
 
-### Erro de API Key
-
-```
+🔧 Troubleshooting
+Erro de API Key
 Error: GROK_API_KEY ou OPENAI_API_KEY não configurada
-```
+Solução: Certifique-se de que pelo menos uma das chaves de API esteja configurada corretamente.
 
-**Solução**: Configure pelo menos uma das API keys.
-
-### Timeout no Vercel
-
-```
+Erro de Timeout
 Error: Function execution timed out
-```
+Solução: Otimize os prompts para serem mais concisos e reduza o maxTokens na configuração da API para evitar processamentos longos.
 
-**Solução**: Reduza o `maxTokens` ou otimize prompts.
-
-### CORS Error
-
-```
+CORS Error
 Error: CORS policy blocked
-```
+Solução: Certifique-se de que a variável de ambiente VERCEL_URL esteja configurada corretamente.
 
-**Solução**: Configure `VERCEL_URL` corretamente.
+💰 Custos
+Grok API (Gratuito)
+Nível gratuito generoso, ideal para começar.
 
-## 💰 Custos
+OpenAI API
+Custo por token. Estime ~R$ 0,10 por conversa, resultando em ~R$ 10-30/mês para 100-300 conversas.
 
-### Grok API (Gratuito)
+Vercel (Gratuito)
+100GB de largura de banda e funções serverless incluídas no plano gratuito.
 
-- Tier gratuito generoso
-- Ideal para começar
+📞 Suporte
+Para dúvidas ou problemas, entre em contato:
 
-### OpenAI API
+Email: ronald.digital27@gmail.com
 
-- ~R$ 0,10 por conversa
-- ~R$ 10-30/mês para 100-300 conversas
+WhatsApp: +55 85 99199-3833
 
-### Vercel (Gratuito)
-
-- 100GB bandwidth
-- Serverless functions incluídas
-
-## 🚀 Próximos Passos
-
-1. **Integre no seu site atual**
-2. **Teste com clientes reais**
-3. **Ajuste prompts baseado nos resultados**
-4. **Adicione analytics mais detalhados**
-5. **Implemente follow-up automático**
-
-## 📞 Suporte
-
-Para dúvidas ou problemas:
-
-- Email: ronald.digital27@gmail.com
-- WhatsApp: +55 85 99199-3833
-
----
-
-**🎉 Agora você tem um agente de IA especialista em vendas rodando 24/7 por menos de R$ 30/mês!**
+🎉 Agora você tem um agente de IA especialista em vendas rodando 24/7, com uma estratégia de vendas clara e poderosa!
