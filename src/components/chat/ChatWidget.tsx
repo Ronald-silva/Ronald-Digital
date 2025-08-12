@@ -1,8 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Bot, Send, X, User } from "lucide-react";
 import saraAvatar from "@/assets/sara-avatar.png";
+
+// Estilos CSS para animações neurociência-baseadas
+const chatButtonStyles = `
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  
+  @keyframes magneticPull {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.05) rotate(1deg); }
+    50% { transform: scale(1.1) rotate(0deg); }
+    75% { transform: scale(1.05) rotate(-1deg); }
+  }
+  
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  
+  .chat-button-magnetic:hover {
+    animation: magneticPull 0.6s ease-in-out infinite;
+  }
+  
+  .chat-button-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+`;
 
 interface Message {
   id: number;
@@ -30,6 +64,36 @@ export function ChatWidget() {
     currentStep: 0,
     topics: []
   });
+  
+  // Estados para efeitos psicológicos
+  const [showUrgency, setShowUrgency] = useState(false);
+  const [attentionPulse, setAttentionPulse] = useState(false);
+  const [visitTime, setVisitTime] = useState(0);
+
+  // Efeito de atenção baseado em tempo (Neurociência: Janela de atenção)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setVisitTime(prev => prev + 1);
+    }, 1000);
+
+    // Após 10 segundos, ativa urgência sutil
+    const urgencyTimer = setTimeout(() => {
+      setShowUrgency(true);
+    }, 10000);
+
+    // Após 30 segundos, pulso de atenção (momento de decisão)
+    const attentionTimer = setTimeout(() => {
+      setAttentionPulse(true);
+      // Remove após 5 segundos para não ser irritante
+      setTimeout(() => setAttentionPulse(false), 5000);
+    }, 30000);
+
+    return () => {
+      clearInterval(timer);
+      clearTimeout(urgencyTimer);
+      clearTimeout(attentionTimer);
+    };
+  }, []);
 
   const addMessage = (type: 'user' | 'bot', text: string) => {
     const newMessage: Message = {
@@ -578,28 +642,99 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Chat Button */}
+      {/* Estilos CSS Customizados */}
+      <style dangerouslySetInnerHTML={{ __html: chatButtonStyles }} />
+      
+      {/* Chat Button - Neurociência & Psicologia Comportamental */}
       {!isOpen && (
         <div className="fixed bottom-6 right-6 z-50">
           <div className="relative group">
-            {/* Tooltip */}
-            <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              <div className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
-                💬 Oi! Sou a Sara, posso te ajudar?
+            {/* Tooltip Animado com Urgência */}
+            <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none transform translate-y-2 group-hover:translate-y-0">
+              <div className="bg-gradient-to-r from-purple-900 to-blue-900 text-white px-4 py-3 rounded-xl text-sm whitespace-nowrap shadow-2xl border border-purple-400/30 backdrop-blur-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="font-medium">💬 Sara está online agora!</span>
+                </div>
+                <div className="text-xs text-purple-200 mt-1">
+                  ✨ Resposta em menos de 30 segundos
+                </div>
                 {/* Arrow */}
-                <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900"></div>
+                <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-purple-900"></div>
               </div>
             </div>
             
-            {/* Button */}
+            {/* Efeitos de Fundo - Dopamina Visual */}
+            <div className="absolute inset-0 rounded-full">
+              {/* Anel de energia rotativo */}
+              <div className="absolute inset-0 rounded-full border-2 border-transparent bg-gradient-to-r from-purple-500 via-blue-500 to-green-500 animate-spin opacity-60" 
+                   style={{ animationDuration: '3s' }}></div>
+              
+              {/* Pulsos concêntricos - Efeito hipnótico */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 animate-ping opacity-20"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 animate-ping opacity-15" 
+                   style={{ animationDelay: '0.5s' }}></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-400 to-blue-400 animate-ping opacity-10" 
+                   style={{ animationDelay: '1s' }}></div>
+            </div>
+            
+            {/* Button Principal - Gatilho de Ação */}
             <Button
               onClick={openChat}
-              className="rounded-full w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+              className="chat-button-magnetic chat-button-breathe rounded-full w-16 h-16 bg-gradient-to-br from-purple-600 via-blue-600 to-green-600 hover:from-purple-700 hover:via-blue-700 hover:to-green-700 shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 relative overflow-hidden transform hover:scale-110 active:scale-95"
+              style={{
+                background: 'linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #10B981 100%)',
+                boxShadow: '0 20px 40px rgba(139, 92, 246, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+              }}
             >
-              <Bot className="w-7 h-7 relative z-10" />
-              {/* Pulse effect */}
-              <div className="absolute inset-0 bg-blue-400 rounded-full animate-ping opacity-20"></div>
+              {/* Avatar da Sara - Conexão Emocional */}
+              <div className="relative z-10 w-8 h-8 rounded-full overflow-hidden border-2 border-white/30">
+                <img 
+                  src={saraAvatar} 
+                  alt="Sara"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.parentElement!.innerHTML = '<div class="w-full h-full bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xs">S</div>';
+                  }}
+                />
+                {/* Indicador de status online */}
+                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+              </div>
+              
+              {/* Efeito de brilho interno */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Partículas flutuantes - Efeito mágico */}
+              <div className="absolute inset-0 rounded-full overflow-hidden">
+                <div className="absolute top-2 left-2 w-1 h-1 bg-white rounded-full animate-ping opacity-60" style={{ animationDelay: '0s' }}></div>
+                <div className="absolute top-4 right-3 w-1 h-1 bg-yellow-300 rounded-full animate-ping opacity-60" style={{ animationDelay: '0.7s' }}></div>
+                <div className="absolute bottom-3 left-4 w-1 h-1 bg-pink-300 rounded-full animate-ping opacity-60" style={{ animationDelay: '1.4s' }}></div>
+                <div className="absolute bottom-2 right-2 w-1 h-1 bg-blue-300 rounded-full animate-ping opacity-60" style={{ animationDelay: '2.1s' }}></div>
+              </div>
             </Button>
+            
+            {/* Contador de urgência - FOMO (Fear of Missing Out) */}
+            {showUrgency && (
+              <div className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full animate-bounce shadow-lg">
+                <span className="animate-pulse">🔥</span>
+              </div>
+            )}
+            
+            {/* Pulso de atenção após 30 segundos */}
+            {attentionPulse && (
+              <div className="absolute inset-0 rounded-full border-4 border-yellow-400 animate-ping"></div>
+            )}
+            
+            {/* Texto motivacional que aparece após 3 segundos */}
+            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-pulse pointer-events-none"
+                 style={{ 
+                   animation: 'fadeInUp 0.5s ease-out 3s forwards',
+                 }}>
+              <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs px-3 py-1 rounded-full shadow-lg whitespace-nowrap">
+                💡 Tire suas dúvidas grátis!
+              </div>
+            </div>
           </div>
         </div>
       )}
