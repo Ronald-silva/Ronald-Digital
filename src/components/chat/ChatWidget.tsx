@@ -561,6 +561,22 @@ export function ChatWidget() {
       return "Que ótimo! Fico feliz em te ajudar! 🚀\n\nPara criar a proposta perfeita, me conta:\n• Que tipo de projeto? (site, landing page, portfólio)\n• Para que tipo de negócio?\n• Qual seu prazo?\n\n💡 **Dica:** Uma landing page bem feita pode aumentar suas vendas em 300%!";
     }
     
+    // 👋 PERGUNTAS PESSOAIS SOBRE A SARA
+    if (lowerMsg.includes('qual seu nome') || lowerMsg.includes('como você se chama') || lowerMsg.includes('quem é você') || lowerMsg.includes('seu nome')) {
+      const personalResponses = [
+        "Oi! Eu sou a Sara! 😊\n\nSou especialista em marketing digital da Ronald Digital. Meu trabalho é te ajudar a criar sites incríveis que realmente vendem!\n\nE você, qual seu nome?",
+        "Prazer! Sou a Sara, sua consultora digital! ✨\n\nTrabalho na Ronald Digital ajudando pessoas como você a crescerem online.\n\nComo posso te chamar?",
+        "Oi! Me chamo Sara e sou apaixonada por criar sites que transformam visitantes em clientes! 🚀\n\nQual seu nome?"
+      ];
+      
+      return personalResponses[Math.floor(Math.random() * personalResponses.length)];
+    }
+
+    // 🤖 PERGUNTAS SOBRE SER IA/ROBÔ
+    if (lowerMsg.includes('você é robô') || lowerMsg.includes('é inteligência artificial') || lowerMsg.includes('é ia') || lowerMsg.includes('é bot')) {
+      return "Olha, sou uma IA sim, mas uma IA bem especial! 😊\n\nFui criada para ser sua parceira digital, não apenas um robô que responde perguntas. Tenho personalidade própria e genuíno interesse em te ajudar!\n\nPode conversar comigo naturalmente - entendo contexto e sempre busco a melhor solução para você.\n\nEntão, como posso te ajudar a decolar na internet? 🚀";
+    }
+
     // 👋 SAUDAÇÕES INTELIGENTES
     if (lowerMsg.includes('oi') || lowerMsg.includes('olá') || lowerMsg.includes('ola')) {
       const hour = new Date().getHours();
@@ -604,13 +620,23 @@ export function ChatWidget() {
     }
     
     // 📞 CONTATO
-    if (lowerMsg.includes('contato') || lowerMsg.includes('telefone') || lowerMsg.includes('whatsapp')) {
-      return "Claro! Vamos conversar! 📞\n\n📱 **WhatsApp:** (85) 99199-3833\n📧 **Email:** contato@ronalddigital.com\n🌐 **Site:** ronalddigital.com\n\nOu me conta aqui mesmo: que tipo de projeto você precisa? Posso já te dar uma ideia de preço! 💰";
+    if (lowerMsg.includes('contato') || lowerMsg.includes('telefone') || lowerMsg.includes('whatsapp') || lowerMsg.includes('falar')) {
+      return "Claro! Aqui estão nossos contatos: 📞\n\n📱 **WhatsApp:** (85) 99199-3833\n📧 **Email:** contato@ronalddigital.com\n🌐 **Site:** ronalddigital.com\n\nMas fica aqui comigo também! Posso te ajudar com tudo: orçamentos, dúvidas, exemplos...\n\nQue tipo de projeto você tem em mente? 😊";
     }
     
     // 📚 EXEMPLOS/PORTFÓLIO
-    if (lowerMsg.includes('exemplo') || lowerMsg.includes('trabalho') || lowerMsg.includes('ver')) {
-      return "Claro! Adoro mostrar nossos trabalhos! 🎨\n\n🌐 **Veja nosso portfólio:** ronalddigital.com/portfolio\n\nOu me chama no WhatsApp que envio exemplos específicos para seu segmento:\n📱 **(85) 99199-3833**\n\nQue tipo de negócio você tem? Assim posso mostrar exemplos similares! 🎯";
+    if (lowerMsg.includes('exemplo') || lowerMsg.includes('trabalho') || lowerMsg.includes('ver') || lowerMsg.includes('mostrar')) {
+      return "Adoro mostrar nossos trabalhos! 🎨\n\n🌐 **Veja nosso portfólio:** ronalddigital.com/portfolio\n\nOu me chama no WhatsApp **(85) 99199-3833** que envio exemplos específicos!\n\nMe conta: que tipo de empresa você tem? Assim posso mostrar casos similares:\n• Restaurante que aumentou pedidos em 200%\n• Loja que dobrou vendas online\n• Profissional que triplicou clientes 🎯";
+    }
+
+    // ❓ COMO FUNCIONA / PROCESSO
+    if (lowerMsg.includes('como funciona') || lowerMsg.includes('processo') || lowerMsg.includes('etapas')) {
+      return "Nosso processo é bem simples e transparente! ⚙️\n\n📋 **1. Briefing** - Entendemos sua necessidade\n🎨 **2. Design** - Criamos o layout\n💻 **3. Desenvolvimento** - Construímos o site\n🧪 **4. Testes** - Garantimos qualidade\n🚀 **5. Entrega** - Site no ar!\n\n⏰ **Prazos:**\n• Landing Page: 3-5 dias\n• Portfólio: 5-7 dias\n• Site Completo: 7-15 dias\n\nQue tipo de projeto você precisa?";
+    }
+
+    // 🤔 DÚVIDAS GERAIS
+    if (lowerMsg.includes('dúvida') || lowerMsg.includes('pergunta') || lowerMsg.includes('não entendi')) {
+      return "Sem problemas! Estou aqui para esclarecer tudo! 😊\n\n💡 **Posso te ajudar com:**\n• Tipos de sites e preços\n• Prazos de entrega\n• Processo de criação\n• Exemplos de trabalhos\n• Dúvidas técnicas\n\nQual sua principal dúvida? Pode perguntar à vontade! 🤝";
     }
     
     // 🔄 RESPOSTA PADRÃO INTELIGENTE
