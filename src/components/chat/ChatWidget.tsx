@@ -556,7 +556,23 @@ export function ChatWidget() {
       return "Ótima pergunta! 💰 Nossos preços são super justos:\n\n🎯 **Landing Pages:** R$ 500-1.000\n(Perfeitas para vender produtos/serviços)\n\n🎨 **Portfólios:** R$ 400-800\n(Ideais para mostrar seu trabalho)\n\n🌐 **Sites Completos:** R$ 800-2.000\n(Presença digital completa)\n\n✨ **Parcelamos em até 3x sem juros!**\n\nQue tipo de projeto você precisa?";
     }
     
-    // 🎯 INTERESSE DE COMPRA
+    // 🎯 ESPECIFICAÇÃO DETALHADA DE PROJETO
+    if ((lowerMsg.includes('preciso de um site') || lowerMsg.includes('quero um site')) && (lowerMsg.includes('loja') || lowerMsg.includes('empresa') || lowerMsg.includes('negócio'))) {
+      
+      // Detecta tipo específico de negócio
+      if (lowerMsg.includes('loja de roupas') || lowerMsg.includes('roupas')) {
+        return "Perfeito! Loja de roupas é um segmento incrível! 👗✨\n\nPara lojas de moda, recomendo um e-commerce completo com:\n• Catálogo organizado por categoria/marca\n• Sistema de filtros (tamanho, cor, preço)\n• Carrinho de compras otimizado\n• Integração com redes sociais\n\n💰 **Investimento:** R$ 1.200-2.500\n⏰ **Prazo:** 10-15 dias\n\nQual seu orçamento para esse projeto?";
+      }
+      
+      if (lowerMsg.includes('restaurante')) {
+        return "Que ótimo! Restaurante é um segmento que vende muito online! 🍕\n\nPara restaurantes, recomendo:\n• Cardápio digital interativo\n• Sistema de pedidos online\n• Integração com delivery\n• Área de reservas\n\n💰 **Investimento:** R$ 800-1.800\n⏰ **Prazo:** 7-12 dias\n\nQual seu orçamento disponível?";
+      }
+      
+      // Resposta genérica para outros tipos
+      return "Excelente! Vou criar algo perfeito para seu negócio! 🚀\n\nPara dar o orçamento exato, preciso saber:\n• Qual seu orçamento disponível?\n• Para quando você precisa?\n• Tem preferência de funcionalidades?\n\nCom essas informações, posso criar uma proposta sob medida!";
+    }
+
+    // 🎯 INTERESSE DE COMPRA GERAL
     if (lowerMsg.includes('quero') || lowerMsg.includes('preciso') || lowerMsg.includes('gostaria') || lowerMsg.includes('interessado')) {
       return "Que ótimo! Fico feliz em te ajudar! 🚀\n\nPara criar a proposta perfeita, me conta:\n• Que tipo de projeto? (site, landing page, portfólio)\n• Para que tipo de negócio?\n• Qual seu prazo?\n\n💡 **Dica:** Uma landing page bem feita pode aumentar suas vendas em 300%!";
     }
@@ -671,20 +687,39 @@ export function ChatWidget() {
         setContext(prev => ({
           ...prev,
           currentStep: prev.currentStep + 1,
-          lastIntent: getIntent(inputText)
+          lastIntent: getIntent(inputText),
+          leadScore: result.leadScore || prev.leadScore || 0
         }));
         
         addMessage('bot', result.resposta);
+        
+        // Log para debug
+        console.log('✅ API Sara funcionou:', {
+          leadScore: result.leadScore,
+          agente: result.agenteAtivo,
+          acao: result.proximaAcao
+        });
       } else {
+        console.warn('⚠️ API retornou erro:', result);
         // Fallback inteligente quando API falha
         const fallbackResponse = getIntelligentFallback(inputText, context);
         addMessage('bot', fallbackResponse);
       }
     } catch (error) {
-      console.error('Erro ao chamar API:', error);
+      console.error('❌ Erro ao chamar API Sara:', error);
+      console.log('🔄 Ativando fallback inteligente para:', inputText);
+      
       // Fallback inteligente quando há erro de conexão
       const fallbackResponse = getIntelligentFallback(inputText, context);
       addMessage('bot', fallbackResponse);
+      
+      // Atualiza contexto mesmo no fallback
+      setContext(prev => ({
+        ...prev,
+        currentStep: prev.currentStep + 1,
+        lastIntent: getIntent(inputText),
+        usingFallback: true
+      }));
     }
   };
 
