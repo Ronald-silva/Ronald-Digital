@@ -529,60 +529,92 @@ export function ChatWidget() {
     return "Como posso te ajudar mais?";
   };
 
-  // Fallback inteligente quando a API falha - com ESCUTA ATIVA
+  // 🧠 FALLBACK ULTRA INTELIGENTE - SARA OFFLINE MAS ESPERTA
   const getIntelligentFallback = (message: string, ctx: ConversationContext): string => {
-    const lowerMsg = message.toLowerCase();
+    const lowerMsg = message.toLowerCase().trim();
     
-    // PRIORIDADE MÁXIMA: Perguntas diretas sobre negócio
-    if (lowerMsg.includes('vocês fazem') || lowerMsg.includes('vocês vendem') || lowerMsg.includes('que tipo de')) {
-      if (lowerMsg.includes('computador') || lowerMsg.includes('hardware')) {
-        return "Não, nós não vendemos computadores. Somos especialistas em criação de sites, landing pages e portfólios profissionais. Posso te ajudar com algum projeto digital?";
+    console.log(`🔄 FALLBACK ATIVO para: "${message}"`);
+    
+    // 🚨 PRIORIDADE MÁXIMA: Perguntas diretas sobre negócio
+    if (lowerMsg.includes('vocês fazem') || lowerMsg.includes('vocês vendem') || lowerMsg.includes('que tipo de') || lowerMsg.includes('vocês trabalham')) {
+      if (lowerMsg.includes('computador') || lowerMsg.includes('hardware') || lowerMsg.includes('notebook')) {
+        return "Olá! Não, nós da Ronald Digital não vendemos computadores. 💻\n\nSomos uma agência especializada em:\n• Sites profissionais\n• Landing pages que convertem\n• Portfólios incríveis\n\nQual projeto digital posso te ajudar a criar? 🚀";
       }
-      return "Nós da Ronald Digital criamos sites, landing pages e portfólios profissionais. Qual tipo de projeto você tem em mente?";
+      if (lowerMsg.includes('app') || lowerMsg.includes('aplicativo')) {
+        return "Nosso foco é em sites e páginas web! 🌐\n\nCriamos:\n• Sites responsivos (funcionam como app)\n• Landing pages otimizadas\n• Portfólios profissionais\n\nQue tal um site que funciona perfeitamente no celular? 📱";
+      }
+      return "Nós da Ronald Digital somos especialistas em projetos digitais! ✨\n\n🎯 Nossos serviços:\n• Landing Pages (R$ 500-1.000)\n• Portfólios (R$ 400-800)\n• Sites Completos (R$ 800-2.000)\n\nQual tipo de projeto você tem em mente?";
     }
     
-    // PRIORIDADE ALTA: Expressões de dúvida
-    if (lowerMsg.includes('dúvida') || lowerMsg.includes('pergunta') || lowerMsg.includes('me ajuda')) {
-      return "Claro! Pode perguntar à vontade. Estou aqui para te ajudar com qualquer dúvida sobre nossos serviços.";
+    // ⚡ PRIORIDADE ALTA: Expressões de dúvida ou interesse
+    if (lowerMsg.includes('dúvida') || lowerMsg.includes('pergunta') || lowerMsg.includes('me ajuda') || lowerMsg.includes('queria saber')) {
+      return "Claro! Adoro ajudar com projetos digitais! 😊\n\nSou especialista em criar sites que realmente vendem. Qual sua principal dúvida?\n\n💡 Posso te ajudar com:\n• Estratégia digital\n• Preços e prazos\n• Exemplos de trabalhos";
     }
     
-    // PRIORIDADE BAIXA: Saudações - RESPONDE ADEQUADAMENTE
+    // 💰 PERGUNTAS SOBRE PREÇOS (ALTA PRIORIDADE)
+    if (lowerMsg.includes('preço') || lowerMsg.includes('valor') || lowerMsg.includes('custa') || lowerMsg.includes('orçamento')) {
+      return "Ótima pergunta! 💰 Nossos preços são super justos:\n\n🎯 **Landing Pages:** R$ 500-1.000\n(Perfeitas para vender produtos/serviços)\n\n🎨 **Portfólios:** R$ 400-800\n(Ideais para mostrar seu trabalho)\n\n🌐 **Sites Completos:** R$ 800-2.000\n(Presença digital completa)\n\n✨ **Parcelamos em até 3x sem juros!**\n\nQue tipo de projeto você precisa?";
+    }
+    
+    // 🎯 INTERESSE DE COMPRA
+    if (lowerMsg.includes('quero') || lowerMsg.includes('preciso') || lowerMsg.includes('gostaria') || lowerMsg.includes('interessado')) {
+      return "Que ótimo! Fico feliz em te ajudar! 🚀\n\nPara criar a proposta perfeita, me conta:\n• Que tipo de projeto? (site, landing page, portfólio)\n• Para que tipo de negócio?\n• Qual seu prazo?\n\n💡 **Dica:** Uma landing page bem feita pode aumentar suas vendas em 300%!";
+    }
+    
+    // 👋 SAUDAÇÕES INTELIGENTES
     if (lowerMsg.includes('oi') || lowerMsg.includes('olá') || lowerMsg.includes('ola')) {
-      return "Oi! Que bom te ver por aqui! 😊 Como posso te ajudar hoje?";
+      const hour = new Date().getHours();
+      let greeting = "Oi";
+      if (hour >= 6 && hour < 12) greeting = "Bom dia";
+      else if (hour >= 12 && hour < 18) greeting = "Boa tarde";
+      else if (hour >= 18 || hour < 6) greeting = "Boa noite";
+      
+      return `${greeting}! Que bom te ver por aqui! 😊\n\nSou a Sara, especialista em criar sites que realmente vendem! 🚀\n\nComo posso te ajudar hoje? Precisa de:\n• Site profissional?\n• Landing page?\n• Portfólio incrível?`;
     }
     
-    if (lowerMsg.includes('bom dia')) {
-      return "Bom dia! Fico feliz em te ajudar! Como posso te auxiliar hoje?";
+    if (lowerMsg.includes('bom dia') || lowerMsg.includes('boa tarde') || lowerMsg.includes('boa noite')) {
+      return "Oi! Que educação! 😊 Prazer em te conhecer!\n\nSou a Sara da Ronald Digital, especialista em transformar ideias em sites incríveis! ✨\n\nMe conta: que tipo de projeto digital você tem em mente?";
     }
     
-    if (lowerMsg.includes('boa tarde')) {
-      return "Boa tarde! Que ótimo falar com você! Em que posso te ajudar?";
-    }
-    
-    if (lowerMsg.includes('boa noite')) {
-      return "Boa noite! Prazer em te atender! Como posso te ajudar?";
-    }
-    
-    // Perguntas sobre serviços específicos
+    // 🎨 PERGUNTAS SOBRE SERVIÇOS ESPECÍFICOS
     if (lowerMsg.includes('portfólio') || lowerMsg.includes('portfolio')) {
-      return "Ótima escolha! Portfólios são essenciais para mostrar seu trabalho e conquistar credibilidade. Que tipo de portfólio você precisa?";
+      return "Excelente escolha! 🎨 Portfólios são essenciais para:\n\n✅ Mostrar seu trabalho\n✅ Conquistar credibilidade\n✅ Atrair clientes ideais\n\n💰 **Preço:** R$ 400-800\n⏰ **Prazo:** 5-7 dias\n\nQue tipo de portfólio você precisa? (fotógrafo, designer, arquiteto...)";
     }
     
     if (lowerMsg.includes('landing page') || lowerMsg.includes('página de vendas')) {
-      return "Perfeito! Landing pages são ideais para converter visitantes em clientes. Qual produto ou serviço você quer promover?";
+      return "Perfeito! 🎯 Landing pages são máquinas de vendas!\n\n🚀 **Benefícios:**\n• Conversão até 400% maior\n• Foco total no produto\n• Otimizada para Google\n\n💰 **Preço:** R$ 500-1.000\n⏰ **Prazo:** 3-5 dias\n\nQual produto/serviço você quer promover?";
     }
     
-    if (lowerMsg.includes('site')) {
-      return "Excelente! Um site profissional é fundamental para qualquer negócio hoje. Que tipo de site você tem em mente?";
+    if (lowerMsg.includes('site') && !lowerMsg.includes('landing')) {
+      return "Ótima ideia! 🌐 Um site profissional é fundamental hoje!\n\n✨ **Incluímos:**\n• Design responsivo\n• Otimização SEO\n• Integração redes sociais\n• Formulários de contato\n\n💰 **Preço:** R$ 800-2.000\n⏰ **Prazo:** 7-15 dias\n\nPara que tipo de negócio?";
     }
     
-    // Perguntas sobre preços
-    if (lowerMsg.includes('preço') || lowerMsg.includes('valor') || lowerMsg.includes('custa')) {
-      return "Nossos preços variam de R$ 400 a R$ 2.000, dependendo do tipo de projeto:\n\n• Landing Pages: R$ 500-1.000\n• Portfólios: R$ 400-800\n• Sites completos: R$ 800-2.000\n\nQue tipo de projeto você precisa?";
+    // 🤔 OBJEÇÕES COMUNS
+    if (lowerMsg.includes('caro') || lowerMsg.includes('muito')) {
+      return "Entendo sua preocupação! 💭\n\nMas pensa assim: se seu site trouxer apenas 2 clientes novos por mês, já pagou o investimento! 📈\n\n✨ **Facilidades:**\n• Parcelamos em 3x sem juros\n• Garantia de 30 dias\n• Suporte incluso\n\nQue tal uma consultoria gratuita para ver o que é melhor para você?";
     }
     
-    // Resposta padrão amigável
-    return "Entendi! Para te ajudar melhor, me conta: que tipo de projeto digital você tem em mente? Site, landing page, portfólio...?";
+    if (lowerMsg.includes('pensar') || lowerMsg.includes('decidir')) {
+      return "Claro! Pensar é importante! 🤔\n\nMas enquanto você pensa, que tal eu te enviar alguns exemplos dos nossos trabalhos?\n\n📱 **WhatsApp:** (85) 99199-3833\n\n💡 **Dica:** Tenho apenas 3 vagas este mês. Que tal garantir a sua com uma consultoria gratuita?";
+    }
+    
+    // ⏰ PERGUNTAS SOBRE PRAZO
+    if (lowerMsg.includes('prazo') || lowerMsg.includes('tempo') || lowerMsg.includes('demora') || lowerMsg.includes('quando')) {
+      return "Nossos prazos são bem rápidos! ⚡\n\n⏰ **Prazos típicos:**\n• Landing Page: 3-5 dias\n• Portfólio: 5-7 dias  \n• Site Completo: 7-15 dias\n\n🚨 **Urgente?** Posso priorizar seu projeto!\n\nQue tipo de projeto você precisa?";
+    }
+    
+    // 📞 CONTATO
+    if (lowerMsg.includes('contato') || lowerMsg.includes('telefone') || lowerMsg.includes('whatsapp')) {
+      return "Claro! Vamos conversar! 📞\n\n📱 **WhatsApp:** (85) 99199-3833\n📧 **Email:** contato@ronalddigital.com\n🌐 **Site:** ronalddigital.com\n\nOu me conta aqui mesmo: que tipo de projeto você precisa? Posso já te dar uma ideia de preço! 💰";
+    }
+    
+    // 📚 EXEMPLOS/PORTFÓLIO
+    if (lowerMsg.includes('exemplo') || lowerMsg.includes('trabalho') || lowerMsg.includes('ver')) {
+      return "Claro! Adoro mostrar nossos trabalhos! 🎨\n\n🌐 **Veja nosso portfólio:** ronalddigital.com/portfolio\n\nOu me chama no WhatsApp que envio exemplos específicos para seu segmento:\n📱 **(85) 99199-3833**\n\nQue tipo de negócio você tem? Assim posso mostrar exemplos similares! 🎯";
+    }
+    
+    // 🔄 RESPOSTA PADRÃO INTELIGENTE
+    return "Entendi! 😊 Para te ajudar da melhor forma, me conta:\n\n🎯 **Que tipo de projeto você precisa?**\n• Site profissional\n• Landing page para vendas\n• Portfólio incrível\n\n💡 **Ou tem alguma dúvida específica?**\n\nEstou aqui para te ajudar a crescer online! 🚀";
   };
 
   const sendMessage = async () => {
@@ -727,14 +759,7 @@ export function ChatWidget() {
             )}
             
             {/* Texto motivacional que aparece após 3 segundos */}
-            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-pulse pointer-events-none"
-                 style={{ 
-                   animation: 'fadeInUp 0.5s ease-out 3s forwards',
-                 }}>
-              <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs px-3 py-1 rounded-full shadow-lg whitespace-nowrap">
-                💡 Tire suas dúvidas grátis!
-              </div>
-            </div>
+
           </div>
         </div>
       )}

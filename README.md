@@ -157,26 +157,23 @@ Lead Frio (apenas curiosidade)
 
 💡 Personalização
 Modificar Personas
-Edite o arquivo lib/agents/personas.js para ajustar:
+Edite os arquivos JSON em `data/` para ajustar:
 
-Personalidade dos agentes
-
-Conhecimentos específicos de cada um
-
-Processo de vendas e preços
-
-Prompt inicial do agente "Maestro"
+- `data/maestro.json` - Configurações do orquestrador
+- `data/persona_rackham.json` - Neil Rackham (SPIN Selling)
+- `data/persona_konrath.json` - Jill Konrath (BANT)
+- `data/persona_vaynerchuk.json` - Gary Vaynerchuk (Value-First)
 
 Adicionar novos agentes
-Basta seguir a mesma estrutura no arquivo personas.js para criar um novo agente:
+Crie um novo arquivo JSON em `data/` seguindo a estrutura:
 
-JavaScript
-
-NOVO_AGENTE: {
-  name: "Seu Nome",
-  role: "Sua Especialidade",
-  prompt: "Seu prompt personalizado..."
+```json
+{
+  "nome": "Seu Nome",
+  "role": "Sua Especialidade", 
+  "prompt_inicial": "Seu prompt personalizado..."
 }
+```
 📊 Métricas e Analytics
 O sistema retorna dados valiosos que podem ser usados para analisar a performance do agente:
 

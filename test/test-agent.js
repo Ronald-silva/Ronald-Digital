@@ -1,9 +1,9 @@
 // Teste local do agente (rode com: node test/test-agent.js)
 import { MultiAgentSalesSystem } from "../lib/agents/multiAgent.js";
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 // Carrega as variáveis do arquivo .env
-dotenv.config();
+dotenv.confia g();
 process.env.BUSINESS_EMAIL = "ronald.digital27@gmail.com";
 process.env.BUSINESS_PHONE = "5585991993833";
 

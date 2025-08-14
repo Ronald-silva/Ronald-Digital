@@ -1,5 +1,5 @@
 import React from 'react';
-import SaraAIChat from '../components/SaraAIChat';
+import { ChatWidget } from '../components/chat/ChatWidget';
 import { Brain, Zap, Target, Heart, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -145,7 +145,7 @@ export default function SaraAI() {
         </Card>
 
         {/* Chat da Sara AI */}
-        <SaraAIChat />
+        <ChatWidget />
 
         {/* Footer informativo */}
         <div className="text-center mt-8 space-y-4">
